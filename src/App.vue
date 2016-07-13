@@ -1,12 +1,12 @@
 <template>
-  <div id="wrapper">
+  <div id="wrapper" style="overflow-x:hidden">
     <nav class="navbar navbar-default">
-      <div class="container">
+      <!-- <div class="container"> -->
         <a class="navbar-brand" href="#">
           <i class="glyphicon glyphicon-time"></i>
           番茄土豆
         </a>
-      </div>
+     <!--  </div> -->
     </nav>
       <div class="container">
         <template v-if = 'width'>
@@ -21,6 +21,7 @@
           </div>
         </template>
          <template v-else>
+           <div class="col-sm-12">
           <header>
             <a  @click = 'plan = !plan'>{{link[+plan]}}</a>
           </header>
@@ -28,6 +29,7 @@
           <component-plan v-show = 'plan'></component-plan>
           <component-acco v-show = '!plan' v-bind:adone = "done"></component-acco>
          </template>
+         </div>
      </div>
   </div>
 </template>
