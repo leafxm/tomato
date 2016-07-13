@@ -9,15 +9,25 @@
       </div>
     </nav>
       <div class="container">
-        <div class="col-sm-4">
-          <component-plan></component-plan>
-        </div>
-        <div class="col-sm-4">
+        <template v-if = 'width'>
+          <div class="col-sm-4">
+            <component-plan></component-plan>
+          </div>
+          <div class="col-sm-4">
+            <component-clock></component-clock>
+          </div>
+          <div class="col-sm-4">
+            <component-acco v-bind:adone = "done"></component-acco>
+          </div>
+        </template>
+         <template v-else>
+          <header>
+            <a  @click = 'plan = !plan'>{{link[+plan]}}</a>
+          </header>
           <component-clock></component-clock>
-        </div>
-        <div class="col-sm-4">
-          <component-acco v-bind:adone = "done"></component-acco>
-        </div>
+          <component-plan v-show = 'plan'></component-plan>
+          <component-acco v-show = '!plan' v-bind:adone = "done"></component-acco>
+         </template>
      </div>
   </div>
 </template>
@@ -33,7 +43,15 @@
           startTime: '',
           endTime: ''
         },
-        getThing: false
+        getThing: false,
+        width: true,
+        plan: 1,
+        link: ['plan', 'done']
+      }
+    },
+    ready () {
+      if (document.body.clientWidth < 800) {
+        this.width = false
       }
     },
     components: {
